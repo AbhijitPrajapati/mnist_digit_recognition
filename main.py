@@ -28,4 +28,14 @@ if not os.path.exists('model.h5'):
 # load model
 loaded_model = tf.keras.models.load_model('model.h5')
 
-rand_digit = x_test[random.randrange(0, x_test.shape[0])]
+rand_index = random.randrange(0, x_test.shape[0])
+rand_digit = x_test[rand_index]
+actual = y_test[rand_index]
+prediction = loaded_model.predict(rand_digit.reshape(1, 28, 28, 1))
+
+rand_digit = cv2.resize(rand_digit, (600, 600))
+rand_digit = cv2.putText(rand_digit, f'Prediction: {np.argmax(prediction[0])}    Actual: {actual}', (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
+
+cv2.imshow('Digit', rand_digit)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
