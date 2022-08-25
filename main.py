@@ -5,7 +5,7 @@ from keras.datasets import mnist
 from keras.models import Sequential
 from keras.layers import Dense, Flatten, MaxPooling2D, Conv2D
 import os
-import cv2, PIL as pillow
+import cv2
 import random
 
 # load data
